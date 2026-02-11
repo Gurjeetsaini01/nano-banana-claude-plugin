@@ -1,17 +1,17 @@
 # Nano Banana - Gemini Image Generation Plugin for Claude Code
 
-> The most complete Google Gemini image generation plugin for Claude Code. 13 generation modes, text-to-image, image editing, style transfer, inpainting, 4K output, and more - all from a single `/genimage` command.
+> Google Gemini image generation plugin for Claude Code. Text-to-image, text-guided image editing, style transfer, 4K output, multi-reference composition, search grounding, and multi-turn editing - all from a single `/genimage` command.
 
 [![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-blue)](https://claude.ai/claude-code)
 [![Gemini API](https://img.shields.io/badge/Powered_by-Gemini_API-4285F4)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-orange)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-orange)](CHANGELOG.md)
 
 ---
 
 ## What is Nano Banana?
 
-**Nano Banana** is Google's name for Gemini's native image generation capabilities. This plugin brings all of those capabilities directly into Claude Code through 13 specialized Python scripts, a smart slash command, and an AI agent that automatically picks the right tool for your task.
+**Nano Banana** is Google's name for Gemini's native image generation capabilities. This plugin brings those capabilities directly into Claude Code through 8 Python scripts, a smart slash command, and an AI agent that automatically picks the right tool for your task.
 
 **One command. Every Gemini image mode.**
 
@@ -21,52 +21,55 @@
 
 ---
 
+## How It Works
+
+Everything is **text-guided** through the Gemini API. There is no visual UI, no mask painter, no interactive editor. You describe what you want in natural language, and Gemini's AI handles the rest.
+
+For image editing, Gemini **semantically understands** your instructions and automatically identifies which regions to modify. Say "replace the sky with a sunset" and Gemini knows what "the sky" is and replaces only that region.
+
+---
+
 ## Capabilities
 
 ### Generation
 - **Text-to-Image** - Describe any scene and get a generated image
 - **4K Ultra Resolution** - Output up to 4096x4096 pixels with Gemini 3 Pro
 - **Search Grounded Generation** - Create images using real-time data from Google Search (weather, news, stock charts, live events)
-- **Batch Aspect Ratios** - 10 ratios from square 1:1 to ultrawide 21:9
+- **10 Aspect Ratios** - From square 1:1 to ultrawide 21:9
 
-### Editing
+### Editing (all text-guided, no UI needed)
 - **Image Editing** - Modify any image with natural language instructions
-- **Inpainting** - Semantically replace or fill regions of an image
-- **Add/Remove Elements** - Add objects, remove unwanted elements, fill naturally
-- **High-Fidelity Detail Preservation** - Edit images while keeping fine details intact (logos, textures, text)
-- **Style Transfer** - Apply the artistic style of one image onto another
+- **Inpainting** - Describe a region in text, Gemini identifies and replaces it
+- **Add/Remove Objects** - "Remove the car" or "Add a cat on the table" - Gemini handles it
+- **Background Replacement** - "Replace the background with a mountain landscape"
+- **Bring to Life** - Transform sketches and drawings into photorealistic versions
+- **Detail Preservation** - Edit images while keeping fine details intact (logos, textures, text)
+- **Style Transfer** - Apply the artistic style of one image onto another (requires 2 images)
 
 ### Advanced
 - **Multi-turn Editing** - Chat-based iterative refinement with full conversation memory
-- **Multi-Reference Composition** - Combine up to 14 reference images (6 objects + 5 humans) into a single output
-- **Character Consistency** - Generate 360-degree views and maintain character identity across angles
-- **Bring to Life** - Transform static objects, drawings, or sketches into photorealistic versions
+- **Multi-Reference Composition** - Combine up to 14 reference images into a single output
 - **Advanced Composition** - Merge elements from multiple source images into one cohesive result
 
 ### Prompting Intelligence
-- **Smart Script Selection** - The AI agent automatically picks the right generation mode based on your request
+- **Smart Script Selection** - The AI agent automatically picks the right script based on your request
 - **Prompt Enhancement** - Helps you craft effective prompts using photography terms, art direction, and composition language
 - **Prompt Templates** - Built-in templates for photorealistic, illustration, product, and text-heavy images
 
 ---
 
-## All 13 Generation Modes
+## Scripts
 
-| Mode | What it does | Gemini Model |
-|------|-------------|--------------|
-| **Text-to-Image** | Generate images from text prompts | Gemini 2.5 Flash Image |
-| **Image Editing** | Edit existing images with text instructions | Gemini 2.5 Flash Image |
-| **Multi-turn Editing** | Iterative chat-based image refinement with memory | Gemini 3 Pro Image |
-| **Style Transfer** | Apply the artistic style of one image to another | Gemini 2.5 Flash Image |
-| **Inpainting** | Semantic region replacement and fill | Gemini 2.5 Flash Image |
-| **Add/Remove Elements** | Add or remove objects from images | Gemini 2.5 Flash Image |
-| **High-Fidelity Preservation** | Edit images while preserving fine details | Gemini 2.5 Flash Image |
-| **4K Generation** | Generate images up to 4096x4096 resolution | Gemini 3 Pro Image |
-| **Search Grounding** | Generate images based on real-time Google Search data | Gemini 3 Pro Image |
-| **Multi-Reference** | Combine up to 14 reference images into one output | Gemini 3 Pro Image |
-| **Character Consistency** | 360-degree views and consistent character angles | Gemini 2.5 Flash Image |
-| **Advanced Composition** | Combine elements from multiple source images | Gemini 2.5 Flash Image |
-| **Bring to Life** | Animate static objects into realistic versions | Gemini 2.5 Flash Image |
+| Script | What it does | Gemini Model |
+|--------|-------------|--------------|
+| **texttoimage.py** | Generate images from text prompts | Gemini 2.5 Flash Image |
+| **imageedit.py** | Edit images with text instructions (inpainting, add/remove, all edits) | Gemini 2.5 Flash Image |
+| **styletransfer.py** | Apply the artistic style of one image to another | Gemini 2.5 Flash Image |
+| **compose.py** | Combine elements from multiple source images | Gemini 2.5 Flash Image |
+| **multiref.py** | Generate using up to 14 reference images | Gemini 3 Pro Image |
+| **hires.py** | Generate images up to 4096x4096 resolution | Gemini 3 Pro Image |
+| **searchground.py** | Generate images using real-time Google Search data | Gemini 3 Pro Image |
+| **multiturn.py** | Chat-based iterative image editing with memory | Gemini 3 Pro Image |
 
 ---
 
@@ -111,9 +114,24 @@ cp scripts/.env.example scripts/.env
 /genimage a watercolor painting of a lighthouse during a storm
 ```
 
-### Image Editing
+### Image Editing (all text-guided)
 ```
 /genimage edit photo.png - replace the sky with a dramatic sunset
+```
+
+### Remove Objects
+```
+/genimage remove the car from street-photo.png and fill naturally
+```
+
+### Add Objects
+```
+/genimage add a golden retriever sitting on the couch in living-room.png
+```
+
+### Bring to Life
+```
+/genimage transform this pencil sketch into a photorealistic image - sketch.png
 ```
 
 ### 4K High Resolution
@@ -131,29 +149,9 @@ cp scripts/.env.example scripts/.env
 /genimage visualize the current weather forecast for NYC as a modern infographic
 ```
 
-### Inpainting
-```
-/genimage replace the background in portrait.png with a mountain landscape
-```
-
-### Add/Remove Objects
-```
-/genimage remove the car from street-photo.png and fill naturally
-```
-
 ### Multi-Reference (up to 14 images)
 ```
 /genimage group photo of person1.png person2.png person3.png in an office setting
-```
-
-### Bring to Life
-```
-/genimage bring this pencil sketch to life as a photorealistic image
-```
-
-### Character Consistency
-```
-/genimage show this character from front, side, back, and 3/4 view in a 2x2 grid
 ```
 
 ---
@@ -188,7 +186,7 @@ cp scripts/.env.example scripts/.env
 | Slash Command | `commands/genimage.md` | `/genimage` - user-facing command with smart routing |
 | Agent | `agents/gemini-image-gen.md` | Autonomous agent for complex image tasks |
 | Skill | `skills/genimage/SKILL.md` | Auto-activating prompting knowledge and decision tree |
-| Scripts | `scripts/*.py` | 13 specialized Python scripts for each generation mode |
+| Scripts | `scripts/*.py` | 8 Python scripts for each generation mode |
 
 ---
 
@@ -214,11 +212,6 @@ nano-banana-claude-plugin/
 │   ├── searchground.py
 │   ├── hires.py
 │   ├── styletransfer.py
-│   ├── inpaint.py
-│   ├── addremove.py
-│   ├── detailpreserve.py
-│   ├── bringtolife.py
-│   ├── consistency360.py
 │   └── compose.py
 ├── requirements.txt
 ├── CHANGELOG.md

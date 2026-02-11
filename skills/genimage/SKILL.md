@@ -1,12 +1,18 @@
 ---
 name: Gemini Image Generation
-description: Use when the user wants to generate images, edit images, create artwork, do style transfer, inpainting, 4K generation, or any visual content creation using the Gemini API. Activates on phrases like "generate an image", "create a picture", "edit this image", "style transfer", "remove background", "upscale to 4K", "inpaint", or "make an illustration".
+description: Use when the user wants to generate images, edit images, create artwork, do style transfer, 4K generation, or any visual content creation using the Gemini API. Activates on phrases like "generate an image", "create a picture", "edit this image", "style transfer", "remove background", "upscale to 4K", or "make an illustration".
 version: 1.0.0
 ---
 
 # Gemini Image Generation Skill
 
-Provides comprehensive knowledge for generating and editing images using the Gemini API through a suite of 13 specialized Python scripts.
+Provides comprehensive knowledge for generating and editing images using the Gemini API through 8 specialized Python scripts.
+
+## How It Works
+
+All generation and editing is **text-guided** through the Gemini API. There is no visual UI, mask painter, or interactive editor. You describe what you want in natural language, and Gemini's AI handles the rest.
+
+For image editing, Gemini **semantically understands** your text instructions and automatically identifies which regions of the image to modify. For example, "replace the sky with a sunset" - Gemini knows what "the sky" means and replaces only that region.
 
 ## Available Modes
 
@@ -16,13 +22,8 @@ Provides comprehensive knowledge for generating and editing images using the Gem
 - **Search-grounded** (`searchground.py`): Uses real-time Google Search data
 
 ### Image Editing (input image + text)
-- **General edit** (`imageedit.py`): Any text-guided edit
-- **Style transfer** (`styletransfer.py`): Apply style from a reference image
-- **Inpainting** (`inpaint.py`): Replace/fill regions semantically
-- **Add/remove** (`addremove.py`): Add or remove objects
-- **Detail preserve** (`detailpreserve.py`): Edit while preserving fine details
-- **Bring to life** (`bringtolife.py`): Animate static objects
-- **360 view** (`consistency360.py`): Character consistency across angles
+- **General edit** (`imageedit.py`): All text-guided editing - inpainting, add/remove objects, background replacement, detail-preserving edits, bringing sketches to life, changing angles, and any other modification
+- **Style transfer** (`styletransfer.py`): Apply the artistic style of one image onto another (requires 2 images)
 
 ### Multi-Image
 - **Compose** (`compose.py`): Combine elements from multiple images
@@ -36,6 +37,18 @@ Provides comprehensive knowledge for generating and editing images using the Gem
 ```
 python "$CLAUDE_PLUGIN_ROOT/scripts/<script>.py" --prompt "..." [options]
 ```
+
+## Editing Examples
+
+All of these use `imageedit.py --image photo.png --prompt "..."`:
+
+- **Inpainting**: "Replace the sky with dramatic storm clouds"
+- **Remove object**: "Remove the person on the left and fill naturally"
+- **Add object**: "Add a golden retriever sitting on the couch"
+- **Background swap**: "Replace the background with a tropical beach"
+- **Bring to life**: "Transform this pencil sketch into a photorealistic image"
+- **Detail preserve**: "Place this logo on a billboard in Times Square, keep the logo sharp"
+- **Style change**: "Make this photo look like an oil painting"
 
 ## Prompting Guide
 
