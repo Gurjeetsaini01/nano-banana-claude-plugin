@@ -2,6 +2,7 @@
 name: genimage
 description: Generate or edit images using the Gemini API
 argument-hint: describe what image you want to generate or edit
+user_invocable: true
 allowed-tools:
   - Bash
   - Read
