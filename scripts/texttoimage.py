@@ -1,25 +1,19 @@
-import os
 import argparse
-from dotenv import load_dotenv
-from google import genai
-from google.genai import types
 from PIL import Image
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-load_dotenv(os.path.join(SCRIPT_DIR, ".env"))
-
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-
+from google.genai import types
+from utils import get_client, NANO_BANANA_2
 
 def generate(prompt, output="generated_image.png", aspect_ratio=None):
+    client = get_client()
     config = None
     if aspect_ratio:
         config = types.GenerateContentConfig(
             image_config=types.ImageConfig(aspect_ratio=aspect_ratio)
         )
 
+    print(f"Generating image with {NANO_BANANA_2}...")
     response = client.models.generate_content(
-        model="gemini-2.5-flash-image",
+        model=NANO_BANANA_2,
         contents=[prompt],
         config=config,
     )
@@ -32,13 +26,12 @@ def generate(prompt, output="generated_image.png", aspect_ratio=None):
             image.save(output)
             print(f"Image saved to {output}")
 
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Text-to-image generation with Gemini")
-    parser.add_argument("--prompt", "-p", required=True, help="Text prompt for image generation")
+    parser = argparse.ArgumentParser(description="Text-to-image generation with Gemini 3.1")
+    parser.add_argument("--prompt", "-p", required=True, help="Text prompt")
     parser.add_argument("--output", "-o", default="generated_image.png", help="Output filename")
     parser.add_argument("--aspect-ratio", "-ar", default=None,
                         choices=["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"],
-                        help="Aspect ratio for the output image")
+                        help="Aspect ratio")
     args = parser.parse_args()
     generate(args.prompt, args.output, args.aspect_ratio)
