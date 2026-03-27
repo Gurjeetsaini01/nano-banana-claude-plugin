@@ -1,6 +1,6 @@
 ---
 name: genimage
-description: Generate or edit images using the Gemini API (Nano Banana 2 / Pro)
+description: Generate, edit, or create any image — photos, illustrations, website visuals, placeholders, icons, thumbnails, banners, or any graphic asset
 argument-hint: describe what image you want to generate or edit
 user_invocable: true
 allowed-tools:
@@ -10,45 +10,43 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-You are a Gemini image generation assistant. The user wants to generate or edit images using the Nano Banana `genimage.py` script.
+Generate or edit an image using the Nano Banana script.
 
 User request: $ARGUMENTS
 
-## Your Task
+## Task
 
-Run the unified script with the correct flags for the user's request.
-
-**Scripts location:** `$CLAUDE_PLUGIN_ROOT/scripts/`
+1. Determine the mode from the request.
+2. Craft a descriptive prompt (narrative, not keywords). For detailed templates, read `$CLAUDE_PLUGIN_ROOT/skills/genimage/references/prompting-guide.md`.
+3. Run the script with correct flags.
+4. Show the result to the user.
 
 ```
 python "$CLAUDE_PLUGIN_ROOT/scripts/genimage.py" --prompt "..." [options]
 ```
 
-## Modes
-
-The mode is determined automatically by the flags you pass:
+## Mode → Flags
 
 | Mode | Flags |
 |------|-------|
-| **Text-to-image** | `--prompt "..."` only |
-| **Image editing** | `--prompt "edit instructions" --images source.png` |
-| **Style transfer** | `--prompt "Apply the style of the first image to the second" --images style.png source.png` |
-| **Multi-image composition / reference** | `--prompt "..." --images a.png b.png [c.png ...]` (up to 14) |
-| **High-resolution (2K / 4K)** | add `--resolution 2K` or `--resolution 4K` to any mode above |
+| Text-to-image | `--prompt "..."` only |
+| Image editing | `--prompt "edit instructions" --images source.png` |
+| Style transfer | `--prompt "Apply style..." --images style.png target.png` |
+| Multi-image composition | `--prompt "..." --images a.png b.png [...]` (up to 14) |
+| High-resolution | add `--resolution 2K` or `4K` to any mode (triggers Pro model) |
 
-High-resolution mode automatically uses **Nano Banana Pro** (`gemini-3-pro-image-preview`).
-All other modes use **Nano Banana 2** (`gemini-3.1-flash-image-preview`).
+## All Flags
 
-## Flags
+| Flag | Required | Default |
+|------|----------|---------|
+| `--prompt "text"` | Yes | — |
+| `--output file.png` | No | `generated_image.png` |
+| `--images path [...]` | No | — |
+| `--aspect-ratio RATIO` | No | — |
+| `--resolution 1K\|2K\|4K` | No | — |
 
-- `--prompt "text"` (required)
-- `--output filename.png` (optional)
-- `--images path [path ...]` (optional — omit for text-to-image)
-- `--aspect-ratio` (1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9)
-- `--resolution 1K|2K|4K` (optional — triggers Pro model)
+Aspect ratios: `1:1` `2:3` `3:2` `3:4` `4:3` `4:5` `5:4` `9:16` `16:9` `21:9`
 
-## How Editing Works
-
-All editing is **text-guided**. Describe what you want ("replace the sky", "remove the car") and Gemini semantically identifies and modifies the regions automatically.
+Editing is text-guided — describe what to change and Gemini handles region detection automatically.
 
 If the script fails due to a missing API key, advise the user to run `/nano-banana:setup`.
