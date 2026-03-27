@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.1.0] - 2026-03-27
+
+### Changed
+- Migrated to the **ibrahim-plugins** unified marketplace (previously `nano-banana-marketplace`)
+- Both Nano Banana and SupaConductor are now discoverable from the same marketplace
+- Aligned `plugin.json` and `marketplace.json` format with SupaConductor for consistency
+- Updated README with corrected install instructions and plugin structure docs
+- Added cross-listing: each plugin's marketplace.json now references both plugins
+
+### Added
+- GitHub Actions release automation via release-please (matching SupaConductor)
+- `.release-please-manifest.json` for automated versioning
+- `.github/release.yml` for changelog categorization
+- Plugin structure section in README
+- "Also by Ibrahim" section linking to SupaConductor
+
+### Fixed
+- `.gitignore` expanded to cover OS files, editor files, and generated images
+
 ## [2.0.0] - 2026-03-25
 
 ### Changed

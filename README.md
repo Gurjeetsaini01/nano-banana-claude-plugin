@@ -9,7 +9,7 @@
 [![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-blue?style=flat-square)](https://claude.ai/claude-code)
 [![Gemini API](https://img.shields.io/badge/Powered_by-Gemini_3.1-4285F4?style=flat-square&logo=google)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.3.0-orange?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.1.0-orange?style=flat-square)](CHANGELOG.md)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 
@@ -29,17 +29,19 @@
 
 **Nano Banana 2** brings Google Gemini 3.1's state-of-the-art image generation and editing capabilities directly into [Claude Code](https://claude.ai/claude-code). It ships a smart `/genimage` slash command, an autonomous Gemini image agent, and a single universal Python script covering every generation and editing workflow — all wired together so you never leave your coding environment.
 
-> **Just type `/genimage` and describe what you want.** The agent picks the right script, enhances your prompt, and runs the generation automatically.
+> **Just type `/genimage` and describe what you want.** The agent picks the right flags, enhances your prompt, and runs the generation automatically.
 
 ```
 /genimage a photorealistic cyberpunk street in Cairo, neon palm trees, 16:9
 ```
 
+Part of the **[Ibrahim Plugins](https://github.com/Ibrahim-3d)** collection for Claude Code — alongside [SupaConductor](https://github.com/Ibrahim-3d/conductor-orchestrator-supaconductor) (multi-agent orchestration).
+
 ---
 
 ## Features
 
-### 🖼️ Image Generation
+### Image Generation
 | Feature | Description |
 |---------|-------------|
 | **Text-to-Image** | Generate any image from a text prompt (Gemini 3.1 Flash) |
@@ -47,7 +49,7 @@
 | **Search-Grounded Generation** | Images informed by real-time Google Search data |
 | **14-Image Multi-Reference** | Mix up to 14 reference images for consistent characters & objects |
 
-### ✏️ AI-Powered Image Editing (Text-Guided, No Masks)
+### AI-Powered Image Editing (Text-Guided, No Masks)
 | Feature | Description |
 |---------|-------------|
 | **Inpainting** | "Replace the sky with a sunset" — no mask required |
@@ -56,9 +58,9 @@
 | **Multi-Image Composition** | Blend elements from multiple source images |
 | **Multi-Turn Chat Editing** | Iteratively refine images through conversation |
 
-### ⚡ Developer Experience
+### Developer Experience
 - **Zero context-switching** — generate images without leaving Claude Code
-- **Autonomous agent** — auto-selects the best script for your request
+- **Autonomous agent** — auto-selects the best flags for your request
 - **Smart prompt enhancement** — the agent crafts effective prompts for you
 - **All aspect ratios** — 1:1, 16:9, 9:16, 4:3, 3:4, 21:9, and more
 
@@ -69,22 +71,17 @@
 ### Option 1: Marketplace (Recommended)
 
 ```bash
-/plugin marketplace add Ibrahim-3d/nano-banana-claude-plugin
-/plugin install nano-banana@nano-banana-marketplace
+claude plugin add Ibrahim-3d/nano-banana-claude-plugin
 ```
 
-### Option 2: Direct Install
-
-```bash
-/plugin install Ibrahim-3d/nano-banana-claude-plugin
-```
-
-### Option 3: Manual Clone
+### Option 2: Manual Clone
 
 ```bash
 git clone https://github.com/Ibrahim-3d/nano-banana-claude-plugin.git ~/.claude/plugins/nano-banana
 pip install google-genai python-dotenv Pillow
 ```
+
+After installing, restart Claude Code to activate the plugin.
 
 ---
 
@@ -161,8 +158,8 @@ Use image editing with follow-up calls, passing the previously generated image b
 
 | Model | Codename | Best For |
 |-------|----------|----------|
-| `gemini-3.1-flash-image-preview` | **Nano Banana 2** 🍌 | Fast generation, search grounding, 14-ref composition, chat editing |
-| `gemini-3-pro-image-preview` | **Nano Banana Pro** ✨ | 2K/4K resolution, professional assets, thinking mode |
+| `gemini-3.1-flash-image-preview` | **Nano Banana 2** | Fast generation, search grounding, 14-ref composition, chat editing |
+| `gemini-3-pro-image-preview` | **Nano Banana Pro** | 2K/4K resolution, professional assets, thinking mode |
 
 ---
 
@@ -196,12 +193,49 @@ High-resolution mode automatically uses **Nano Banana Pro**. All other modes use
 
 ---
 
+## Plugin Structure
+
+```
+nano-banana-claude-plugin/
+├── .claude-plugin/
+│   ├── plugin.json          # Plugin manifest
+│   └── marketplace.json     # Ibrahim Plugins marketplace listing
+├── agents/
+│   └── gemini-image-gen.md  # Autonomous image generation agent
+├── commands/
+│   ├── genimage.md          # /genimage slash command
+│   └── setup.md             # /setup API key configuration
+├── hooks/
+│   └── hooks.json           # SessionStart env check
+├── skills/
+│   └── genimage/
+│       └── SKILL.md         # Image generation knowledge
+├── scripts/
+│   ├── genimage.py          # Universal generation script
+│   ├── setup_key.py         # API key persistence
+│   ├── check_env.py         # Environment validation
+│   └── utils.py             # Shared client & model constants
+└── settings.json            # Default agent activation
+```
+
+---
+
 ## Requirements
 
 - **Claude Code** (latest)
 - **Python 3.9+**
 - **Gemini API key** — [Get one free](https://aistudio.google.com/apikey)
 - Python packages: `google-genai`, `python-dotenv`, `Pillow`
+
+---
+
+## Also by Ibrahim
+
+| Plugin | Description |
+|--------|-------------|
+| **[SupaConductor](https://github.com/Ibrahim-3d/conductor-orchestrator-supaconductor)** | Multi-agent orchestration with Evaluate-Loop, parallel execution, and Board of Directors |
+
+All plugins are part of the **ibrahim-plugins** marketplace for Claude Code.
 
 ---
 
@@ -231,7 +265,7 @@ Released under the [MIT License](LICENSE). Free to use, modify, and distribute.
 
 **Built for [Claude Code](https://claude.ai/claude-code)** · Powered by **[Google Gemini 3.1](https://ai.google.dev/)**
 
-**Nano Banana 2** 🍌 · **Nano Banana Pro** ✨ · Made with ❤️ by [Ibrahim-3d](https://github.com/Ibrahim-3d)
+**Nano Banana 2** · **Nano Banana Pro** · Made by [Ibrahim-3d](https://github.com/Ibrahim-3d)
 
 *AI image generation · Text-to-image · Image editing · Style transfer · Inpainting · 4K generation · Claude Code plugin*
 
