@@ -1,22 +1,19 @@
 {
-  "name": "your-nano-banana-marketplace",
-  "description": "My personal Claude plugins marketplace — Nano Banana AI image generation and editing",
+  "name": "gurjeet-nano-banana-marketplace",
+  "description": "Personal Claude plugins marketplace for Nano Banana AI image generation and editing",
   "version": "1.0.0",
   "owner": {
-    "name": "YOUR_NAME",
+    "name": "Gurjeet Saini",
     "url": "https://github.com/Gurjeetsaini01"
   },
   "plugins": [
     {
       "name": "nano-banana",
-      "source": {
-        "source": "github",
-        "repo": "Gurjeetsaini01/nano-banana-claude-plugin"
-      },
-      "description": "Nano Banana AI image generation and editing plugin powered by Google Gemini API. Supports text-to-image, image editing, inpainting, style transfer, 4K generation, and multi-reference composition.",
+      "source": "./",
+      "description": "Nano Banana AI image generation and editing plugin powered by Google Gemini API. Supports text-to-image, image editing, inpainting, style transfer, 4K generation, search grounding, and multi-reference composition.",
       "version": "2.1.0",
       "author": {
-        "name": "Gurjeetsaini01",
+        "name": "Gurjeet Saini",
         "url": "https://github.com/Gurjeetsaini01"
       },
       "homepage": "https://github.com/Gurjeetsaini01/nano-banana-claude-plugin",
@@ -26,13 +23,18 @@
         "image-generation",
         "gemini",
         "google-gemini",
+        "nano-banana",
         "ai-image",
         "text-to-image",
         "image-editing",
         "inpainting",
         "style-transfer",
-        "nano-banana",
-        "claude-plugin"
+        "4k-generation",
+        "multi-reference",
+        "claude-plugin",
+        "claude-code",
+        "generative-ai",
+        "python"
       ],
       "category": "creative"
     }
