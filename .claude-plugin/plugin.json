@@ -1,7 +1,7 @@
 {
   "name": "nano-banana",
   "version": "2.1.0",
-  "description": "Nano Banana AI image generation and editing plugin for Claude. Text-to-image, inpainting, style transfer, 4K generation, search grounding, and multi-reference composition.",
+  "description": "Nano Banana AI image generation and editing plugin powered by Google Gemini API.",
   "author": {
     "name": "Gurjeet Saini",
     "url": "https://github.com/Gurjeetsaini01"
@@ -11,21 +11,10 @@
   "license": "MIT",
   "icon": "assets/logo.png",
   "keywords": [
-    "image-generation",
-    "gemini",
-    "google-gemini",
-    "ai-art",
-    "text-to-image",
-    "image-editing",
-    "style-transfer",
-    "inpainting",
-    "4k-generation",
-    "multi-reference",
     "nano-banana",
-    "nano-banana-pro",
-    "claude-plugin",
-    "claude-code",
-    "generative-ai",
-    "python"
+    "gemini",
+    "image-generation",
+    "image-editing",
+    "claude-plugin"
   ]
 }
