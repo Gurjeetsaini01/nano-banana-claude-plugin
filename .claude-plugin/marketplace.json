@@ -1,0 +1,17 @@
+{
+  "name": "gurjeet-nano-banana",
+  "description": "Gurjeet's Nano Banana Claude plugin",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Gurjeet Saini",
+    "url": "https://github.com/Gurjeetsaini01"
+  },
+  "plugins": [
+    {
+      "name": "nano-banana",
+      "source": ".",
+      "description": "Nano Banana AI image generation and editing plugin powered by Google Gemini API.",
+      "version": "2.1.0"
+    }
+  ]
+}
