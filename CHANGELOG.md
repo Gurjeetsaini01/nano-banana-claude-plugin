@@ -60,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - Standardized plugin structure for Claude Code
-- Added `marketplace.json` for Ibrahim-3d marketplace integration
+- Added `marketplace.json` for marketplace integration
 - Added `settings.json` to auto-activate the Gemini Image Generation agent
 - Added `SessionStart` hook with `check_env.py` to verify Gemini API key configuration
 - Added `icon` metadata to `plugin.json`
