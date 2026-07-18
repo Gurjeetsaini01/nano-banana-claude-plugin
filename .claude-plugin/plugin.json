@@ -3,11 +3,8 @@
   "version": "2.1.0",
   "description": "Nano Banana AI image generation and editing plugin powered by Google Gemini API.",
   "author": {
-    "name": "Gurjeet Saini",
-    "url": "https://github.com/Gurjeetsaini01"
+    "name": "Gurjeet Saini"
   },
-  "homepage": "https://github.com/Gurjeetsaini01/nano-banana-claude-plugin",
-  "repository": "https://github.com/Gurjeetsaini01/nano-banana-claude-plugin",
   "license": "MIT",
   "keywords": [
     "nano-banana",
