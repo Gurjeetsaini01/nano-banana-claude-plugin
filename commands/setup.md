@@ -1,7 +1,7 @@
 ---
 name: setup
 description: Setup the Gemini API key for Nano Banana
-user_invocable: true
+user-invocable: true
 allowed-tools:
   - Bash
   - AskUserQuestion
