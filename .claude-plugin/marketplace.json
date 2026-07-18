@@ -3,8 +3,7 @@
   "description": "Gurjeet's Nano Banana Claude plugin",
   "version": "1.0.0",
   "owner": {
-    "name": "Gurjeet Saini",
-    "url": "https://github.com/Gurjeetsaini01"
+    "name": "Gurjeet Saini"
   },
   "plugins": [
     {
