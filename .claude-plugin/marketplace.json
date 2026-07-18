@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "nano-banana",
-      "source": ".",
+      "source": "./",
       "description": "Nano Banana AI image generation and editing plugin powered by Google Gemini API.",
       "version": "2.1.0"
     }
